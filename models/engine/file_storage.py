@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+Contains the FileStorage class
+"""
+
 import json
 from models.base_model import BaseModel
 
@@ -33,7 +37,7 @@ class FileStorage:
             path = FileStorage.__file_path
             with open(path, 'r') as file:
                 data = json.load(file)
-                for key , value in data.items():
+                for key, value in data.items():
                     if "BaseModel" in key:
                         FileStorage.__objects[key] = BaseModel(**value)
         except:
