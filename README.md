@@ -1,2 +1,1 @@
-AirBnB_clone
-git
+# AirBnB_clone
