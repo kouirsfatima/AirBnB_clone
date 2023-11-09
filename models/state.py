@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """ holds class State"""
+from models.base_model import BaseModel
 
-import models
-from models.base_model import BaseModel, Base
 
-class State(BaseModel, Base):
+class State(BaseModel):
     """Representation of state """
 
     name = ""

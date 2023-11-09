@@ -8,7 +8,8 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-from models.user import Amenity 
+from models.amenity import Amenity 
+
 
 class HBNBCommand(cmd.Cmd):
     """Simple command processor example."""
@@ -16,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     classes = {
-        "BaseMode" : BaseModel,
+        "BaseModel" : BaseModel,
         "User" : User,
         "City" : City,
         "State" : State,
@@ -24,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
         "Amenity": Amenity,
         "review" : Review
     }
+
     def do_EOF(self, line):
         """exit the program"""
         return True
@@ -36,56 +38,53 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the programe"""
         return True
 
-    def do_create(self, line):
-        if not line:
+    def handle_error(self, line):
+        """return 1 if error or 0 in no error found"""
+        args = line.split()
+
+        if len(args) < 1:
             print("** class name missing **")
-        elif line not in HBNBCommand.classes:
+            return 1
+
+        if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
-        else:
+            return 1
+        
+        if len(args) < 2:
+            print("** instance id missing **")
+            return 1
+
+        if args[1] not in storage.all().keys():
+            print("** no instance found **")
+            return 1
+
+        return 0
+
+
+
+    def do_create(self, line):
+        if self.handle_error(line) == 0:
             new = BaseModel()
             storage.save()
             print(new.id)
 
     def do_show(self, line):
-
-        args = line.split()
-        if len(args) == 0:
-            print("** class name missing **")
-            return False
-        if args[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return False
-        if len(args) < 2:
-            print("** instance id missing **")
-            return False
-
-        key = args[0] + "." + args[1]
-        if key not in storage.all().keys():
-            print("** no instance found **")
-            return False
-
-        obj = storage.all()[key]
-        print(obj)
+        if self.handle_error(line) == 0:
+            args = line.split()
+            key = args[0] + '.' + args[1]
+            obj = storage.all()[key]
+            print(obj)
 
     def do_destroy(self, line):
-        args = line.split()
-        if len(args) == 0:
-            print("** class name missing **")
-            return False
-        if args[0] not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return False
-        if len(args) < 2:
-            print("** instance id missing **")
-            return False
+        if self.handle_error(line) == 0:
+            args = line.split()
+            key = args[0] + '.' + args[1]
+            if key not in storage.all().keys():
+                print("** no instance found **")
+                return False
 
-        key = args[0] + '.' + args[1]
-        if key not in storage.all().keys():
-            print("** no instance found **")
-            return False
-
-        del storage.all()[key]
-        storage.save()
+            del storage.all()[key]
+            storage.save()
 
     def do_all(self, line):
         args = line.split()
@@ -95,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
                 new_list.append(str(obj))
      
         elif args[0] in HBNBCommand.classes:
-            for key,value in storage.all().item():
+            for key, value in storage.all().item():
                 if args[0] in key:
                     new_list.append(str(value))
         else:
