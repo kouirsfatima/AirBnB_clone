@@ -3,14 +3,27 @@
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+from models.user import Amenity 
 
 class HBNBCommand(cmd.Cmd):
     """Simple command processor example."""
 
     prompt = '(hbnb) '
 
-    classes = ["BaseModel", "Place", "User"]
-
+    classes = {
+        "BaseMode" : BaseModel,
+        "User" : User,
+        "City" : City,
+        "State" : State,
+        "Place" : Place,
+        "Amenity": Amenity,
+        "review" : Review
+    }
     def do_EOF(self, line):
         """exit the program"""
         return True
@@ -74,6 +87,22 @@ class HBNBCommand(cmd.Cmd):
         del storage.all()[key]
         storage.save()
 
+    def do_all(self, line):
+        args = line.split()
+        new_list = []
+        if len(args) == 0:
+            for obj, in storage.all(). values():
+                new_list.append(str(obj))
+     
+        elif args[0] in HBNBCommand.classes:
+            for key,value in storage.all().item():
+                if args[0] in key:
+                    new_list.append(str(value))
+        else:
+            print ("** class doesn't exist **")
+            return False
+
+        print (new_list)     
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
