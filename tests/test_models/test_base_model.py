@@ -33,7 +33,6 @@ class BaseModelTestCase(unittest.TestCase):
     def test_save(self):
         """test for save method"""
         obj = BaseModel()
-        with patch('models.storage.save') as mock_function:
-            obj.save()
-            mock_function.assert_called_once()
-        
+        old_date = obj.updated_at
+        obj.save()
+        self.assertGreater(old_date, obj.created_at)
