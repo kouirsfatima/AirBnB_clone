@@ -3,7 +3,7 @@
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
-
+from unittest.mock import patch
 
 class BaseModelTestCase(unittest.TestCase):
     def test_BaseModel(self):
@@ -23,8 +23,17 @@ class BaseModelTestCase(unittest.TestCase):
         self.assertIsInstance(new.id, str)
         self.assertIsInstance(new.created_at, datetime)
         self.assertIsInstance(new.updated_at, datetime)
+
     def test_str(self):
         """test correct output for str method"""
         new = BaseModel()
         output = f"[{new.__class__.__name__}] ({new.id}) {new.__dict__}"
         self.assertEqual(str(new), output)
+
+    def test_save(self):
+        """test for save method"""
+        obj = BaseModel()
+        with patch('models.storage.save') as mock_function:
+            obj.save()
+            mock_function.assert_called_once()
+        
