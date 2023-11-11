@@ -50,14 +50,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return 1
         
-        if name != "create" and len(args) < 2:
-            print("** instance id missing **")
-            return 1
+        if name in ["update", "show", "destroy"]:
+            if len(args) < 2:
+                print("** instance id missing **")
+                return 1
 
-        key = args[0] + "." + args[1]
-        if name != "create" and key not in storage.all().keys():
-            print("** no instance found **")
-            return 1
+            key = args[0] + "." + args[1]
+            if key not in storage.all().keys():
+                print("** no instance found **")
+                return 1
 
         if name == "update":
             if len(args) < 3:
