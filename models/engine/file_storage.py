@@ -5,7 +5,12 @@ Contains the FileStorage class
 
 import json
 from models.base_model import BaseModel
-
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+from models.amenity import Amenity 
 
 class FileStorage:
     """file storage class"""
@@ -40,5 +45,17 @@ class FileStorage:
                 for key, value in data.items():
                     if "BaseModel" in key:
                         FileStorage.__objects[key] = BaseModel(**value)
+                    if "Place" in key:
+                        FileStorage.__objects[key] = Place(**value)
+                    if "City" in key:
+                        FileStorage.__objects[key] = City(**value)
+                    if "Amenity" in key:
+                        FileStorage.__objects[key] = Amenity(**value)
+                    if "User" in key:
+                        FileStorage.__objects[key] = User(**value)
+                    if "State" in key:
+                        FileStorage.__objects[key] = State(**value)
+                    if "Review" in key:
+                        FileStorage.__objects[key] = Review(**value)
         except:
             pass
