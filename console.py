@@ -23,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
         "State" : State,
         "Place" : Place,
         "Amenity": Amenity,
-        "review" : Review
+        "Review" : Review
     }
 
     def do_EOF(self, line):
