@@ -40,3 +40,9 @@ class BaseModelTestCase(unittest.TestCase):
             new = BaseModel()
             new.save()
             mock.assert_called_once()
+    def test_to_dict(self):
+        """test count key"""
+        Td = BaseModel()
+        key = Td.to_dict().keys()
+        self.assertCountEqual(
+        key, ['id', 'created_at', 'updated_at', '__class__'])
