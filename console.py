@@ -200,8 +200,8 @@ Usage: update <class name> <id> <attribute name> "<attribute value>"
                 except json.JSONDecodeError:
                     print(f"can't update: invalid type")
                 return
-        else:
-            method_args = method_args.replace(",", " ")
+            else:
+                method_args = method_args.replace(",", " ")
         my_line = f"{class_name} {method_args}"
         return methods[method_name](my_line)
 
