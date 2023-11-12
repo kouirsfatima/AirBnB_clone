@@ -162,7 +162,7 @@ Usage: update <class name> <id> <attribute name> "<attribute value>"
     def default(self, line):
         methods = {
             "all": self.do_all,
-            # "show": self.do_show,
+            "show": self.do_show,
             # "create": self.do_create,
             # "destroy": self.do_destroy,
             # "update": self.do_update,
