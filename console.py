@@ -161,12 +161,12 @@ Usage: update <class name> <id> <attribute name> "<attribute value>"
 
     def default(self, line):
         methods = {
-            "all": self.do_all
+            "all": self.do_all,
             # "show": self.do_show,
             # "create": self.do_create,
             # "destroy": self.do_destroy,
             # "update": self.do_update,
-            # "count": self.do_count
+            "count": self.do_count
         }
         args = line.strip().split(".", 1)
         if len(args) < 2:
@@ -205,16 +205,16 @@ Usage: update <class name> <id> <attribute name> "<attribute value>"
         my_line = f"{class_name} {method_args}"
         return methods[method_name](my_line)
 
-#     def do_count(self, arg):
-#         """Counts the number of instances of a class based on class name
-# Usage: count <class name>
-#         """
-#         counter = 0
-#         arg = arg.strip()
-#         for instance_key in storage.all().keys():
-#             if arg == instance_key.split('.')[0]:
-#                 counter += 1
-#         print(counter)
+    def do_count(self, arg):
+        """Counts the number of instances of a class based on class name
+Usage: count <class name>
+        """
+        counter = 0
+        arg = arg.strip()
+        for instance_key in storage.all().keys():
+            if arg == instance_key.split('.')[0]:
+                counter += 1
+        print(counter)
 
 
 if __name__ == '__main__':
