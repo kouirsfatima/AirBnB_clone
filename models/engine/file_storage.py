@@ -10,7 +10,8 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-from models.amenity import Amenity 
+from models.amenity import Amenity
+
 
 class FileStorage:
     """file storage class"""
@@ -57,5 +58,5 @@ class FileStorage:
                         FileStorage.__objects[key] = State(**value)
                     if "Review" in key:
                         FileStorage.__objects[key] = Review(**value)
-        except:
+        except Exception:
             pass
