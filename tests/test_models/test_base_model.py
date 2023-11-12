@@ -36,5 +36,7 @@ class BaseModelTestCase(unittest.TestCase):
         old_date = obj.updated_at
         obj.save()
         self.assertGreater(old_date, obj.created_at)
-        with patch('models.storage.save') as mock_function:
-            mock_function.assert_called_once()
+        with patch('models.storage.save') as mock:
+            new = BaseModel()
+            new.save()
+            mock.assert_called_once()
