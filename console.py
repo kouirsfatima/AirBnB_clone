@@ -163,9 +163,9 @@ Usage: update <class name> <id> <attribute name> "<attribute value>"
         methods = {
             "all": self.do_all,
             "show": self.do_show,
-            # "create": self.do_create,
-            # "destroy": self.do_destroy,
-            # "update": self.do_update,
+            "create": self.do_create,
+            "destroy": self.do_destroy,
+            "update": self.do_update,
             "count": self.do_count
         }
         args = line.strip().split(".", 1)
