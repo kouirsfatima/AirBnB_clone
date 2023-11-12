@@ -5,7 +5,10 @@ from models.base_model import BaseModel
 from datetime import datetime
 from unittest.mock import patch
 
+
 class BaseModelTestCase(unittest.TestCase):
+    """class for basemodel tests"""
+
     def test_BaseModel(self):
         """attributes existance"""
         new = BaseModel()
@@ -40,9 +43,10 @@ class BaseModelTestCase(unittest.TestCase):
             new = BaseModel()
             new.save()
             mock.assert_called_once()
+
     def test_to_dict(self):
         """test count key"""
         Td = BaseModel()
         key = Td.to_dict().keys()
         self.assertCountEqual(
-        key, ['id', 'created_at', 'updated_at', '__class__'])
+            key, ['id', 'created_at', 'updated_at', '__class__'])

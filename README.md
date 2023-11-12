@@ -40,20 +40,21 @@ def save(self) - serializes __objects to the JSON file (path: __file_path)
     - user.py
 ## tests : this directory contains all tests
 ## test_BaseModel.py
-- def test_BaseModel(self):  this methode test the  attributes existance and  Methodes existance  and 
+- def test_BaseModel(self):  this methode test the  attributes
+existance and  Methodes existance  and
 type test
 - def test_str(self): test correct output for str method
 - def test_save(self): test for save method
 ## test_amenity.py
 test_amenity.py - Contains the TestAmenityDocs class
-- def test_amenity(self): this methode test existince and type test 
+- def test_amenity(self): this methode test existince and type test
 ## test_city.py
-- def test_city(self): this methode test existince and type test 
+- def test_city(self): this methode test existince and type test
 ##  test_place.py
--  def test_place(self): this methode test existince and type test 
+-  def test_place(self): this methode test existince and type test
 ## test_review.py
--  def test_review(self): this methode test existince and type test 
+-  def test_review(self): this methode test existince and type test
 ## test_state
--  def test_state(self): this methode test existince and type test 
+-  def test_state(self): this methode test existince and type test
 ## test_user.py
--  def test_user(self): this methode test existince and type test 
+-  def test_user(self): this methode test existince and type test

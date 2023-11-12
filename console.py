@@ -8,7 +8,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-from models.amenity import Amenity 
+from models.amenity import Amenity
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,13 +17,13 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     classes = {
-        "BaseModel" : BaseModel,
-        "User" : User,
-        "City" : City,
-        "State" : State,
-        "Place" : Place,
+        "BaseModel": BaseModel,
+        "User": User,
+        "City": City,
+        "State": State,
+        "Place": Place,
         "Amenity": Amenity,
-        "Review" : Review
+        "Review": Review
     }
 
     def do_EOF(self, line):
@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return 1
-        
+
         if name in ["update", "show", "destroy"]:
             if len(args) < 2:
                 print("** instance id missing **")
@@ -68,8 +68,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return 1
         return 0
-
-
 
     def do_create(self, line):
         if self.handle_error(line, "create") == 0:
@@ -104,16 +102,16 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             for obj in storage.all().values():
                 new_list.append(str(obj))
-     
+
         elif args[0] in HBNBCommand.classes:
             for key, value in storage.all().items():
                 if args[0] in key:
                     new_list.append(str(value))
         else:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return False
 
-        print (new_list)     
+        print(new_list)
 
     def do_update(self, line):
         if self.handle_error(line, "update") == 0:
