@@ -39,7 +39,9 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def handle_error(self, line, name):
-        """return 1 if error or 0 in no error found"""
+        """Handler for method's error (helper function)
+        return 0 if no error found otherwise 1
+        """
         args = line.split()
 
         if len(args) < 1:
@@ -70,6 +72,9 @@ class HBNBCommand(cmd.Cmd):
         return 0
 
     def do_create(self, line):
+        """Creates a new instance and print it's id:
+Usage: create <class name>
+        """
         if self.handle_error(line, "create") == 0:
             args = line.split()
             # args[0] ==> class_name (type str)
@@ -79,6 +84,9 @@ class HBNBCommand(cmd.Cmd):
             print(new.id)
 
     def do_show(self, line):
+        """Prints the string representation of an instance:
+Usage: show <class name> <instance id>
+        """
         if self.handle_error(line, "show") == 0:
             args = line.split()
             key = args[0] + '.' + args[1]
@@ -86,6 +94,9 @@ class HBNBCommand(cmd.Cmd):
             print(obj)
 
     def do_destroy(self, line):
+        """Deletes an instance
+Usage: destroy <instance id>
+        """
         if self.handle_error(line, "destroy") == 0:
             args = line.split()
             key = args[0] + '.' + args[1]
@@ -97,6 +108,10 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, line):
+        """Prints all string representation of all instances
+Usage 1: all
+Usage 2: all <class name>
+        """
         args = line.split()
         new_list = []
         if len(args) == 0:
@@ -114,6 +129,9 @@ class HBNBCommand(cmd.Cmd):
         print(new_list)
 
     def do_update(self, line):
+        """Updates an instance by adding or updating attribute:
+Usage: update <class name> <id> <attribute name> "<attribute value>"
+        """
         if self.handle_error(line, "update") == 0:
             args = line.split()
             class_name = args[0]
