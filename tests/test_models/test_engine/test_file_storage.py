@@ -4,7 +4,7 @@ import unittest
 from models.engine.file_storage import FileStorage
 
 
-class FileStorage_TestCase(unittest.TestCase):
+class TestFileStorage(unittest.TestCase):
 
     def test_FileStorage_file_path_is_private_str(self):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
@@ -18,6 +18,3 @@ class FileStorage_TestCase(unittest.TestCase):
         self.assertTrue(hasattr(storage, "new"))
         self.assertTrue(hasattr(storage, "save"))
         self.assertTrue(hasattr(storage, "reload"))
-
-        self.assertIsInstance(storage.__file_path, str)
-        self.assertIsInstance(storage.__objects, dict)
