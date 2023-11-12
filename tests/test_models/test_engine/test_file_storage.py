@@ -6,10 +6,14 @@ from models.engine.file_storage import FileStorage
 
 class FileStorage_TestCase(unittest.TestCase):
 
+    def test_FileStorage_file_path_is_private_str(self):
+        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+
+    def test_FileStorage_objects_is_private_dict(self):
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
+    
     def test_FileStorage(self):
         storage = FileStorage()
-        self.assertTrue(hasattr(storage, "__file_path"))
-        self.assertTrue(hasattr(storage, "__objects"))
         self.assertTrue(hasattr(storage, "all"))
         self.assertTrue(hasattr(storage, "new"))
         self.assertTrue(hasattr(storage, "save"))
@@ -17,7 +21,3 @@ class FileStorage_TestCase(unittest.TestCase):
 
         self.assertIsInstance(storage.__file_path, str)
         self.assertIsInstance(storage.__objects, dict)
-
-
-
-
