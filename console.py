@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ console """
 import cmd
+import json
+import re
 from models.base_model import BaseModel
 from models import storage
 from models.city import City
@@ -156,6 +158,63 @@ Usage: update <class name> <id> <attribute name> "<attribute value>"
             else:
                 setattr(obj, att_name, att_value)
             storage.save()
+
+    def default(self, line):
+        methods = {
+            "all": self.do_all
+            # "show": self.do_show,
+            # "create": self.do_create,
+            # "destroy": self.do_destroy,
+            # "update": self.do_update,
+            # "count": self.do_count
+        }
+        args = line.strip().split(".", 1)
+        if len(args) < 2:
+            return super().default(line)
+        class_name = args[0]
+        tmp = args[1].split('(')
+        if len(tmp) < 2:
+            return super().default(line)
+        method_name = tmp[0]
+        method_args = tmp[1].split(")")[0]
+        if method_name not in methods.keys():
+            return super().default(line)
+        # if method_name == "update":
+        #     if '{' in method_args:  # Update from dictionary
+        #         tmp = method_args.split(',', 1)
+        #         if len(tmp) != 2 or '{' not in tmp[1] or '}' not in tmp[1]:
+        #             return super().default(line)
+        #         instance_id = tmp[0]
+        #         if "'" in instance_id:
+        #             instance_id = instance_id.replace("'", " ")
+        #         if '"' in instance_id:
+        #             instance_id = instance_id.replace('"', " ")
+        #         instance_id = instance_id.strip()
+        #         list_dicts = re.findall(r'{.*?}', tmp[1])
+        #         try:
+        #             parced_dict = json.loads(list_dicts[0].replace("'", '"'))
+        #             for attr_name, attr_value in parced_dict.items():
+        #                 my_line = class_name + " " + instance_id + " "
+        #                 my_line += str(attr_name) + " " + str(attr_value)
+        #                 self.do_update(my_line)
+        #         except json.JSONDecodeError:
+        #             print(f"can't update: invalid type")
+        #         return
+        # else:
+        method_args = method_args.replace(",", " ")
+        my_line = f"{class_name} {method_args}"
+        return methods[method_name](my_line)
+
+#     def do_count(self, arg):
+#         """Counts the number of instances of a class based on class name
+# Usage: count <class name>
+#         """
+#         counter = 0
+#         arg = arg.strip()
+#         for instance_key in storage.all().keys():
+#             if arg == instance_key.split('.')[0]:
+#                 counter += 1
+#         print(counter)
 
 
 if __name__ == '__main__':
