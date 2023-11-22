@@ -1,13 +1,14 @@
 header {
-    color: white;
+    background-color: white;
     height: 70px;
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
-  }
+    display: flex;
+}
 
-  header .logo {
+header .log {
     width: 142px;
     height: 60px;
-    background: url("logo/logo.png") no-repeat center;
-    padding-left: 20px;
-  }
+    background: url("../images/log.png");
+    padding-left: auto;
+}
